@@ -1,11 +1,24 @@
-import React from 'react'
+//class based component b/c need need helper methods 
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions/index.js';
+import StreamForm from './StreamForm';
 
-const StreamCreate = () => {
-  return (
-    <div>
-      StreamCreate
-    </div>
-  )
+class StreamCreate extends Component {
+
+  onSubmit = formValues => {
+    this.props.createStream(formValues);
+  }
+
+  render() {
+    return (
+      <div>
+       <h3>Create a Stream</h3>
+       <StreamForm onSubmit={this.onSubmit} />
+      </div>
+    )
+  }
 }
 
-export default StreamCreate;
+
+export default connect(null, {createStream})(StreamCreate);
